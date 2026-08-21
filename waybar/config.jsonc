@@ -1,0 +1,76 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 28,
+    "margin-top": 5,
+    "margin-left": 10,
+    "margin-right": 10,
+
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": [
+        "network",
+        "bluetooth",
+        "cpu",
+        "gpu",
+        "memory",
+        "temperature",
+        "battery"
+    ],
+
+    "hyprland/workspaces": {
+        "format": "<span>{icon}</span>\u2002{id}",
+        "format-icons": {
+            "default": ""
+        }
+    },
+
+    "clock": {
+        "format": "\u2002{:%H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    "network": {
+        "format-wifi": "\u2002{signalStrength}%",
+        "format-ethernet": "󰈀\u2002Wired",
+        "format-disconnected": "󰤮\u2002Disconnected",
+        "tooltip-format": "{ifname} via {gwaddr}"
+    },
+
+    "bluetooth": {
+        "format": "\u2002{status}",
+        "format-disabled": "󰂲\u2002Off",
+        "format-connected": "󰂱\u2002{num_connections}",
+        "tooltip-format": "{controller_alias}\t{controller_address}"
+    },
+
+    "cpu": {
+        "format": "\u2002{usage}%",
+        "interval": 2
+    },
+
+    "gpu": {
+        "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
+        "format": "󰢮\u2002{}%",
+        "interval": 2
+    },
+
+    "memory": {
+        "format": "\u2002{percentage}%",
+        "interval": 2
+    },
+
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "\u2002{temperatureC}°C"
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}\u2002{capacity}%",
+        "format-icons": ["", "", "", "", ""]
+    }
+}

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+clear
+
+kitty +kitten icat \
+    --align left \
+    --place 20x20@1x1 \
+    "$HOME/Pictures/terminalimg/adan.webp"
+fastfetch --logo none | sed 's/^/                         /'
