@@ -59,6 +59,8 @@ local whatsapp = "/home/antony/zapzap.AppImage"
 hl.on("hyprland.start", function ()
 	hl.exec_cmd("hyprpaper")
 	hl.exec_cmd("waybar")
+	hl.exec_cmd("hypridle")
+	hl.exec_cmd("hyprpolkitagen")
 end)
 
 -------------------------------
@@ -69,6 +71,7 @@ end)
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
+hl.env("GTK_THEME","Adwaita:dark")
 
 
 -----------------------
@@ -189,10 +192,29 @@ hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "
 --     border_size = 0,
 --     rounding    = 0,
 -- })
+-- Para compartir pantall con una aplicación que corre sobre xwayland 
+-- se ocupa una herramienta creada por kde plasma pero esta no corre bien 
+-- en hyprland, por ende se añade esta regla que parchea el problema 
+hl.window_rule({ 
+    name = "xwayland-video-bridge-fixes",
+    match = {
+        class = "xwaylandvideobridge"
+    },
+
+
+
+    no_initial_focus = true,
+    no_focus = true,
+    no_anim = true,
+    no_blur = true,
+    max_size = {1,1},
+    opacity = 0.0
+})
 
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
     dwindle = {
+	    force_split = 2,
         preserve_split = true, -- You probably want this
     },
 })
@@ -216,8 +238,9 @@ hl.config({
 
 hl.config({
     misc = {
-        force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
+	disable_splash_rendering = true,
+        force_default_wallpaper = 0,    -- Set to 0 or 1 to disable the anime mascot wallpapers
+        disable_hyprland_logo   = true, -- If true disables the random hyprland logo / anime girl background. :(
     },
 })
 
@@ -228,10 +251,10 @@ hl.config({
 
 hl.config({
     input = {
-        kb_layout  = "us",
+        kb_layout  = "us,es",
         kb_variant = "",
         kb_model   = "",
-        kb_options = "",
+        kb_options = "grp:win_space_toggle",
         kb_rules   = "",
 
         follow_mouse = 1,
@@ -268,7 +291,7 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
-hl.bind(mainMod .. " + ESCAPE", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind(mainMod .. " + Delete", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + I", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(menu))
@@ -280,6 +303,8 @@ hl.bind(mainMod .. "+ ALT + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind("ALT".. " + O", hl.dsp.exec_cmd("obsidian"))
 hl.bind("ALT".. " + D", hl.dsp.exec_cmd("discord"))
 hl.bind("ALT".. " + W", hl.dsp.exec_cmd(whatsapp))
+hl.bind("ALT".. " + C", hl.dsp.exec_cmd("code"))
+hl.bind("ALT".. " + T", hl.dsp.exec_cmd("Telegram"))
 
 hl.bind("PRINT", hl.dsp.exec_cmd("grim - | wl-copy"))
 hl.bind(" SHIFT + PRINT", hl.dsp.exec_cmd('grim -g"$(slurp)" - | wl-copy'))
@@ -318,7 +343,6 @@ hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e+1" }))
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
-hl.bind("mouse:274", hl.dsp.exec_cmd("wl-paste --primary"), {click = true})
 
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
