@@ -9,6 +9,7 @@
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
     "modules-right": [
+		"wireplumber#source-muted",
         "network",
         "bluetooth",
         "cpu",
@@ -17,6 +18,12 @@
         "temperature",
         "battery"
     ],
+	"wireplumber#source-muted": {
+		"node-type": "Audio/Source",
+		"format": "󰍬",
+		"format-muted": "󰍭",
+		"tooltip": true
+	},
 
     "hyprland/workspaces": {
         "format": "<span>{icon}</span>\u2002{id}",
@@ -26,7 +33,7 @@
     },
 
     "clock": {
-        "format": "\u2002{:%H:%M}",
+        "format": "\u2002{:%I:%M %p}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
 
