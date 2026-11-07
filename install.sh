@@ -7,9 +7,18 @@ yay -S xwaylandvideobridge
 yay -S discord
 yay -S minecraft-launcher
 ###Copy files sector
-cp customScripts $HOME/
-cp -r fastfetch fish gtk-4.0 kitty hypr waybar wofi nvim ~/.config
-cp .vimrc $HOME/
+#cp customScripts $HOME/
+#cp -r fastfetch fish gtk-4.0 kitty hypr waybar wofi nvim ~/.config
+#cp .vimrc $HOME/
+#Create simbolic links
+ln -s hyrp/ ~/.config/hypr
+ln -s fastfetch/ ~/.config/fastfetch
+ln -s fish/ ~/.config/fish
+ln -s kitty/ ~/.config/kitty
+ln -s waybar/ ~/.config/waybar
+ln -s MangoHud/ ~/.config/MangoHud
+ln -s nvim/ ~/.config/nvim
+ln -s wofi/ ~/.config/wofi
 
 ##configs
 sudo rfkill unblock bluetooth
