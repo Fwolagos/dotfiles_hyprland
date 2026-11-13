@@ -1,12 +1,12 @@
 #!/bin/bash
-kill hyprpaper
-pkill -9 -x waybar
-pkill -9 -x waybar
-kill hypridle
-kill hyprpolkitagen
+pkill -x hyprpaper
+pkill -x waybar
+pkill -x  hypridle
+pkill -x hyprpolkitagen
 
 hyprpaper &
 waybar &
 hypridle &
 hyprpolkitagen &
-
+wal -R &
+~/customScripts/set_wallpaper_ipc.sh

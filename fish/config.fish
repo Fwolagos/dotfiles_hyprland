@@ -2,6 +2,7 @@ if status is-interactive
     # Commands to run in interactive sessions can go here 
     set -g fish_greeting
     ~/customScripts/terminal-startup.sh
+    ~/customScripts/set_theme_fish.sh
 
 end
 alias update="sudo pacman -Syu"

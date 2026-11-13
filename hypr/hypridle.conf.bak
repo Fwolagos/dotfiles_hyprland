@@ -1,0 +1,6 @@
+wallpaper {
+monitor = eDP-1
+path = ~/customScripts/wallpaper/main.jpg
+fit_mode = cover
+} 
+splash = false

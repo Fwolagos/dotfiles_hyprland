@@ -61,6 +61,8 @@ hl.on("hyprland.start", function ()
 	hl.exec_cmd("waybar")
 	hl.exec_cmd("hypridle")
 	hl.exec_cmd("hyprpolkitagen")
+	hl.exec_cmd("wal -R")
+	hl.exec_cmd("~/customScripts/set_wallpaper_ipc.sh")
 end)
 
 -------------------------------

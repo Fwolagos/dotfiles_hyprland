@@ -1,22 +1,24 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 28,
-    "margin-top": 5,
-    "margin-left": 10,
-    "margin-right": 10,
+    "height": 33,
+    "margin-top": 0,
+    "margin-left": 0,
+    "margin-right": 0,
 
-    "modules-left": ["hyprland/workspaces"],
+    "modules-left": ["custom/distro","hyprland/workspaces"],
     "modules-center": ["clock"],
     "modules-right": [
 		"wireplumber#source-muted",
         "network",
+		"wireplumber",
         "bluetooth",
-        "cpu",
-        "gpu",
         "memory",
+        "cpu",
         "temperature",
-        "battery"
+        "gpu",
+        "battery",
+		"hyprland/language"
     ],
 	"wireplumber#source-muted": {
 		"node-type": "Audio/Source",
@@ -26,26 +28,43 @@
 	},
 
     "hyprland/workspaces": {
-        "format": "<span>{icon}</span>\u2002{id}",
-        "format-icons": {
-            "default": ""
-        }
+		"format": "{icon}",
+		"show-special":true,
+		"format-icons":{
+			"special":"󰮯",
+			"special:magic":"󰮯",
+			"magic":"󰮯"
+		}
     },
 
+	"custom/distro": {
+    "format": " ",
+    "tooltip": false
+	},
+	
+
     "clock": {
-        "format": "\u2002{:%I:%M %p}",
+        "format": "󰀠\u2002{:%I:%M %p}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
 
     "network": {
-        "format-wifi": "\u2002{signalStrength}%",
-        "format-ethernet": "󰈀\u2002Wired",
-        "format-disconnected": "󰤮\u2002Disconnected",
-        "tooltip-format": "{ifname} via {gwaddr}"
+	    "interface": "wlan0",
+		"format-wifi": "{icon}",
+		"format-ethernet": "󰈀",
+		"format-disconnected": "󰤮",
+		"format-icons": [
+			"󰤯",
+			"󰤟",
+			"󰤢",
+			"󰤥",
+			"󰤨"
+		],
+		"tooltip-format-wifi": "{essid} ({signalStrength}%)"
     },
 
     "bluetooth": {
-        "format": "\u2002{status}",
+        "format": "\u2002{status}",
         "format-disabled": "󰂲\u2002Off",
         "format-connected": "󰂱\u2002{num_connections}",
         "tooltip-format": "{controller_alias}\t{controller_address}"
@@ -68,8 +87,12 @@
     },
 
     "temperature": {
-        "critical-threshold": 80,
-        "format": "\u2002{temperatureC}°C"
+		 "thermal-zone": 2,
+		 "hwmon-path": ["/sys/class/hwmon/hwmon2/temp1_input", "/sys/class/thermal/thermal_zone0/temp"],
+		 "critical-threshold": 80,
+		"format-critical": "\u2002{temperatureC}°",// the temperature is in celcius
+        "format": "\u2002{temperatureC}°",
+		"interval":  2
     },
 
     "battery": {
@@ -77,7 +100,17 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon}\u2002{capacity}%",
+        "format": "{icon}\u2002{capacity}",
         "format-icons": ["", "", "", "", ""]
-    }
+    },
+
+	"hyprland/language":{
+		"format": "{short}"
+
+	},
+	"wireplumber":{
+	"format": "{icon}\u2002{volume}%",
+	"format-muted": "",
+	"format-icons": ["", "", ""]
+	}
 }

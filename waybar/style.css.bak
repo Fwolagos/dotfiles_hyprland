@@ -1,0 +1,58 @@
+/* Paleta de Colores Nord */
+@define-color nord_bg rgba(46, 52, 64, 0.75);
+@define-color nord_border #4c566a;
+@define-color nord_fg #eceff4;
+@define-color nord_blue #88c0d0;
+@define-color nord_dark_blue #81a1c1;
+@define-color nord_accent #5e81ac;
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Nerd Font", "Font Awesome 6 Free", Roboto, sans-serif;
+    font-size: 12px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+/* Contenedores con bordes redondeados (estilo píldora) */
+.modules-left, .modules-center, .modules-right {
+    background-color: @nord_bg;
+    border: 1px solid @nord_border;
+    border-radius: 0 0 15px 15px;
+    padding: 0px 20
+}
+
+/* Espaciado de íconos y texto */
+#workspaces button {
+    padding: 0 5px;
+    color: @nord_fg;
+}
+
+#workspaces button.active {
+    color: @nord_blue;
+    font-weight: bold;
+}
+
+#clock {
+    color: @nord_blue;
+    font-weight: bold;
+}
+
+#network, #bluetooth, #cpu, #gpu, #memory, #temperature, #battery {
+    padding: 0 8px;
+    color: @nord_fg;
+}
+
+/* Colores específicos de sección */
+#network { color: @nord_blue; }
+#bluetooth { color: @nord_dark_blue; }
+#cpu, #gpu, #memory { color: @nord_fg; }
+#temperature { color: @nord_accent; }
+#battery { color: @nord_blue; }
+
+#battery.warning { color: #ebcb8b; }
+#battery.critical { color: #bf616a; }
